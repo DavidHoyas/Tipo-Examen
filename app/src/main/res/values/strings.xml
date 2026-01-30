@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TipoExamen</string>
+    <string name="Inicio">Iniciar Sesión</string>
+    <string name="User">Usuario</string>
+    <string name="Password">Contraseña</string>
+    <string name="List">Lista</string>
+    <string name="Update">Actualizar</string>
+    <string name="Login">Login</string>
+    <string name="Name">Nombre</string>
+    <string name="Data">Datos</string>
+</resources>
