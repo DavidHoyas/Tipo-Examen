@@ -63,8 +63,16 @@ class SegundaPantalla : AppCompatActivity() {
     private fun cargarDatosIniciales() {
         lifecycleScope.launch(Dispatchers.IO) {
             val productos = database.productosDao().getAll()
+
             withContext(Dispatchers.Main) {
-                productosAdapter.actualizarProductos(productos)
+                if (productos.isEmpty()) {
+                    // PRIMERA VEZ: carga desde API
+                    Toast.makeText(this@SegundaPantalla, "Cargando desde API...", Toast.LENGTH_SHORT).show()
+                    comprobarDatos()  // Llama a la misma lógica del botón
+                } else {
+                    // YA HAY DATOS: muestra desde BD
+                    productosAdapter.actualizarProductos(productos)
+                }
             }
         }
     }
@@ -99,7 +107,7 @@ class SegundaPantalla : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val api = getRetrofit().create(ProductosAPIService::class.java)
-                val response = api.getProductos("objects")
+                val response = api.getProductos()
 
                 if (response.isSuccessful) {
                     val productosAPI = response.body() ?: emptyList()
