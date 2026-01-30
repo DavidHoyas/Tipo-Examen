@@ -12,6 +12,8 @@ interface ProductosDao {
     suspend fun getAll(): List<ProductosEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(productosParaBD: List<ProductosEntity>)
+    suspend fun insertAll(productos: List<ProductosEntity>)
 
+    @Query("DELETE FROM productos")
+    suspend fun deleteAll()
 }

@@ -22,24 +22,14 @@ class ProductosAdapter(
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = lista.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val producto = lista[position]
 
         holder.tvNombre.text = producto.nombre
-
-        // Mostrar JSON completo formateado
-        val jsonCompleto = """
-            {
-              "id": "${producto.id}",
-              "name": "${producto.nombre}",
-              "data": ${producto.data}
-            }
-        """.trimIndent()
-
         holder.tvDatos.text = producto.data
     }
+
+    override fun getItemCount(): Int = lista.size
 
     fun actualizarProductos(nuevaLista: List<ProductosEntity>) {
         lista = nuevaLista
